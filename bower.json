@@ -1,0 +1,17 @@
+{
+  "name": "pf-progress-bar",
+  "description": "Interval progress bar.",
+  "main": "pf-progress-bar.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-slider": "PolymerElements/paper-slider#^2.0.2"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}
