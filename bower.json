@@ -1,7 +1,30 @@
 {
   "name": "pf-progress-bar",
+  "authors": [
+    "The PolymerJS.io Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "Polymer 2.0",
+    "page",
+    "progress",
+    "slider",
+    "pass",
+    "fail",
+    "skip",
+    "indictor",
+    "wizard",
+    "progress"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PFElements/pf-progress-slider.git"
+  },
   "description": "Interval progress bar.",
   "main": "pf-progress-bar.html",
+  "homepage": "https://github.com/PFElements/pf-progress-slider",
   "dependencies": {
     "polymer": "Polymer/polymer",
     "paper-slider": "PolymerElements/paper-slider"
