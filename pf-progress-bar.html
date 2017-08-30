@@ -1,97 +1,216 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
 
-    <title>pf-progress-bar demo</title>
+<dom-module id="pf-progress-bar">
+  <template>
+    <style>
+      * {
+        transition: 0.3s;
+      }
+      :host {
+        display: block;
+        height: 100%; 
+        width: 100%;
+      }
+      #container {
+        display: inline-block;
+        margin: 0px;
+        padding: 0px;
+        transform-origin: 20px;
+      }
+      #progressbar {
+        display: table;
+        margin-left: 15px;
+        height: 8px;
+        width: calc(100% - 30px);
+      }
+      #slider {
+        width: 100%;
+        --paper-slider-height: 1px;
+        --paper-slider-knob-color: silver;
+        --paper-slider-knob-start-color: silver;
+        --paper-slider-knob-start-border-color: silver;
+        --paper-slider-container-color: silver;
+        --paper-slider-active-color: silver;
+      }
+      .pstep {
+        display: table-cell;
+        border-bottom: 4px solid transparent;
+      }
+      .default {
+        border-bottom-color: silver;
+      }
+      .pass {
+        border-bottom-width: 6px;
+        border-bottom-color: green;
+      }
+      .fail {
+        border-bottom-width: 6px;
+        border-bottom-color: red;
+      }
+      .skip {
+        border-bottom-width: 6px;
+        border-bottom-color: blue;
+      }
+      .current {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-width: 8px !important;
+      }
+    </style>
+    
+    <div id="container">
+      <div id="progressbar"></div>
+      <paper-slider id="slider" min="1" max="{{steps}}"></paper-slider>
+    </div>
 
-    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  </template>
 
-    <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../pf-progress-bar.html">
-
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-        .vertical-demo {
-          --demo-snippet-demo: {
-            height: 600px;
-            item-height:500px;
+  <script>
+    /**
+     * `pf-progress-bar`
+     * Interval progress bar.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PfProgressBar extends Polymer.Element {
+      /**
+       * Returns the name of the element.
+       */
+      static get is() {
+        return 'pf-progress-bar';
+      }
+      /**
+       * Returns the element properties.
+       *  - vertical: boolean element indicating orientation.
+       *  - steps: number element for the number of steps.
+       *  - current: number element indicating current step.
+       */
+      static get properties() {
+        return {
+          vertical: {
+            type: Boolean,
+            value: false
+          },
+          steps: {
+            type: Number
+          },
+          current: {
+            type: Number,
+            value: 1
+          }
+        };
+      }
+      /**
+       * 
+       */
+      connectedCallback() {
+        super.connectedCallback();
+        for(var i = 0; i < this.steps; i++) {
+          var cell = document.createElement('div');
+          cell.classList.add('pstep', 'default');
+          this.$.progressbar.appendChild(cell);
+        }
+        this.$.container.style.width = '100%';
+        this.$.slider.$.sliderBar.style.paddingTop = '7px';
+        this.$.slider.$.sliderBar.style.paddingBottom = '7px';
+        this.$.slider.$.sliderKnob.querySelector('.slider-knob-inner').style.marginTop = '2px';
+        this.$.slider.$.sliderKnob.querySelector('.slider-knob-inner').style.marginBottom = '2px';
+        // this.$.slider._positionKnob = function(ratio) {
+        //   this._setImmediateValue(this._calcStep(this._calcKnobPosition(ratio)));
+        //   this._setRatio(this._calcRatio(this.immediateValue) * 100);
+        //   var interval = 100 / this.max;
+        //   this.$.sliderKnob.style.left = ((interval * (this.immediateValue-1)) + interval/2) + '%';
+        //   if (this.dragging) {
+        //     this._knobstartx = (this.ratio * this._w) / 100;
+        //     this.translate3d(0, 0, 0, this.$.sliderKnob);
+        //   }
+        // }
+        this.$.slider._createRipple = function() {
+          this._rippleContainer = this.$.sliderKnob;
+          return Polymer.PaperInkyFocusBehaviorImpl._createRipple.call(this);
+        }
+        if(this.vertical) {
+          this.$.container.style.transform = 'rotate(90deg)';
+          this.$.container.style.width = this.clientHeight + 'px';
+          var self = this;
+          this.$.slider._trackX = function(event) {
+            if (!this.dragging) {
+              this._trackStart(event);
+            }
+            var direction = this._isRTL ? -1 : 1;
+            var dx = Math.min(this._maxx, Math.max(this._minx, event.detail.dx * direction));
+            if(self.vertical)
+              dx = Math.min(this._maxx, Math.max(this._minx, event.detail.dy * direction));
+            this._x = this._startx + dx;
+            var immediateValue = this._calcStep(this._calcKnobPosition(this._x / this._w * 100));
+            this._setImmediateValue(immediateValue);
+            var translateX = ((this._calcRatio(this.immediateValue) * this._w) - this._knobstartx);
+            this.translate3d(translateX + 'px', 0, 0, this.$.sliderKnob);
+          }
+          this.$.slider._bardown = function(event) {
+            this._w = this.$.sliderBar.offsetWidth;
+            var rect = this.$.sliderBar.getBoundingClientRect();
+            var ratio = (event.detail.x - rect.left) / this._w * 100;
+            if(self.vertical)
+              ratio = (event.detail.y - rect.top) / this._w * 100;
+            if (this._isRTL) {
+              ratio = 100 - ratio;
+            }
+            var prevRatio = this.ratio;
+            this._setTransiting(true);
+            this._positionKnob(ratio);
+            this.debounce('expandKnob', this._expandKnob, 60);
+            if (prevRatio === this.ratio) {
+              this._setTransiting(false);
+            }
+            this.async(function() {
+              this.fire('change', {composed: true});
+            });
+            event.preventDefault();
+            this.focus();
           }
         }
-        button {
-          border-radius: 0px;
-          padding: 6px 12px;
-          background: #fff;
-          border: 1px solid silver;
-        }
-        button:focus {
-          outline: 0;
-          background: rgba(0, 0, 0, 0.1);
-        }
-        input {
-          width: 20px;
-          padding: 5px 4px;
-          text-align: center;
-        }
-      </style>
-    </custom-style>
-
-    <script>
-      function pass(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('pass');
+        this.$.slider._positionKnob(0);
+        this._setCurrent(1);
       }
-      function fail(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('fail');        
+      /**
+       *
+       */
+      ready() {
+        super.ready();
+        var self = this;
+        this.$.slider.addEventListener('immediate-value-changed', function() {self._setCurrent(this.immediateValue)});
+        this.$.slider.addEventListener('value-changed', function() {self._setCurrent(this.value)});
       }
-      function skip(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('skip');        
+      changeCurrent(value) {
+        if(value < 1 || value > this.steps || isNaN(value) || value == this.current)
+          return;
+        var diff = this.current - value;
+        for(var i = 0; i < Math.abs(diff); i++)
+          (diff < 0) ? this.$.slider.increment() : this.$.slider.decrement();
       }
-      function jump(bar, element) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeCurrent(element.value);
+      changeState(state, step) {
+        step = step || this.current;
+        if(step < 1 || step > this.steps)
+          return;
+        var steps = this.shadowRoot.querySelectorAll('.pstep');
+        steps[step-1].classList.remove('default', 'pass', 'fail','skip');
+        steps[step-1].classList.add(state);
+        if(step == this.current)
+          this.$.slider.increment();
       }
-    </script>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Progress Bar: Horizontal</h3>
-      <demo-snippet>
-        <template>
-          <!-- Default orientation is horizontal.  -->
-          <pf-progress-bar steps="55"></pf-progress-bar>
-        </template>
-        <div style="width: 100%; text-align:center; padding: 10px 0px;">
-          <button onclick="pass(0)">Pass</button>
-          <button onclick="fail(0)">Fail</button>
-          <button onclick="skip(0)">Skip</button>
-          <input value="1" id="jump-val" type="text" onkeyup="jump(0, this)">
-        </div>
-      </demo-snippet>
-      <h3>Progress Bar: Vertical</h3>
-      <demo-snippet class="vertical-demo" item-height="700">
-        <!-- Make room for the testing buttons. -->
-        <style>pf-progress-bar { height: calc(90% - 12px) }</style> 
-        <template>
-   
-          <!--  Demo height set to 200px.
-                pf-progress-bar will fill the container. -->
-          <pf-progress-bar vertical steps="10"></pf-progress-bar>
-        </template>
-        <div style="width: 100%; height: calc(10% + 12px); text-align:center;">
-          <button onclick="pass(1)">Pass</button>
-          <button onclick="fail(1)">Fail</button>
-          <button onclick="skip(1)">Skip</button>
-          <input value="1" id="jump-val" type="text" onkeyup="jump(1, this)">
-        </div>
-        <div>
-          hello
-        </div>
-      </demo-snippet>
-    </div>
-  </body>
-</html>
+      _setCurrent(value) {
+        if(value < 1 || value > this.steps || isNaN(value))
+          return;
+        var steps = this.shadowRoot.querySelectorAll('.pstep');
+        steps[this.current-1].classList.remove('current');
+        steps[value-1].classList.add('current');
+        this.current = value;
+      }
+    }
+    window.customElements.define(PfProgressBar.is, PfProgressBar);
+  </script>
+</dom-module>
