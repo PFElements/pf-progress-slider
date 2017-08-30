@@ -35,9 +35,7 @@ Custom Event                     | Description
 ---------------------------------|----------------------------------------
 `event-add`                      | Add event retuns current selected date ('e.detail.date'), fired when user press add event button  
 `event-edit`                     | Edit event retuns event ('e.detail.event'),fired when user press edit event button
-`event-delete`                   | Delete event retuns event ('e.detail.event'),fired when user press delete event button
-`event-select`                   | Event Select retuns event ('e.detail.event'),fired when user click on any event            
-`date-select`                    | Date Select retuns seleted date and events of date ('e.detail.date'and'e.detail.events'),fired when user click on any event             
+        
   
 
 ### Methods
@@ -57,31 +55,7 @@ Custom property                         | Description                           
 ----------------------------------------|-----------------------------------------|-------------------------
 `--pf-calendar-bg-color`                |  Calendar background                    | #4A4A4A
 `--pf-calendar-width`                   |  Calendar Width                         | 420px
-`--pf-calendar-height`                  |  Calendar Height                        | 570px
-`--pf-calendar-header-background`       |  Calendar Header Background             | rgba(66, 66, 66, 1)
-`--pf-calendar-header-height`           |  Calendar Header height                 | 50px
-`--pf-calendar-month-title-font-size`   |   Font size of  month on header         | 20px
-`--pf-calendar-month-title-line-height` |  Calendar Header title line Height      | rgba(66, 66, 66, 1)
-`--pf-calendar-header-left-arrow-color` |  Previous Month arrow color             | rgba(160, 159, 160, 1)
-`--pf-calendar-header-right-arrow-color`|  Next Month arrow color                 | rgba(160, 159, 160, 1)
-`--pf-calendar-month-title-color`       |  Month Title color                      | #000
-`--pf-calendar-week-bg`                 |  Background color of week               | #4A4A4A
-`--pf-calendar-day-bg`                  |  Day Background                         | #4A4A4A
-`--pf-calendar-day-color`               |  color of date                          | #000
-`--pf-calendar-other-day-color`         |  color of previous and next month date  | rgba(255, 255, 255, .3)
-`--pf-calendar-today-color`             |  Current date Color                     | rgba(156` 202, 235, 1)
-`--pf-calendar-selected-date-bg`        |  Selected Date Background color         | #000
-`--pf-calendar-selected-date-color`     |  Selected Date color                    | #fff
-`--pf-calendar-day-name-color`          |  Name of Day color e.g(MON,TUE,WED)     | rgba(255` 255, 255, .5)
-`--pf-calendar-event-detail-bg`         |  Event box background                   | rgba(164, 164, 164, 1)
-`--pf-calendar-event-color`              |  color of label "Event"                | #000
-`--pf-calendar-addevent-button-bg-color'|  Add Event Button color                 | rgba(164, 164, 164, 1)
-`--pf-calendar-addevent-button-text-color`| Add Event text color                  | #fff
-`--pf-calendar-addevent-button-hover-color`|  Add event button hover color        | rgba(170, 170, 170, 1)
-`--pf-calendar-addbutton-disply`        |  to hide button set "none"              |inline-block
-`--pf-calendar-deletebutton-disply`     |  to hide button set "none"              |inline
-`--pf-calendar-editbutton-disply`       |  to hide button set "none"              |inline
-`--pf-calendar-legend-bg`               |  Background color of legend bar         | rgba(60, 60, 60, 1)
+
 
 
 
@@ -124,7 +98,7 @@ Your application is already set up to be tested via [web-component-tester](https
 
 See the list of elements, demos, and documentation by browsing this collection on webcomponents.org:
 
-### [Go to webcomponents.org](https://www.webcomponents.org/collection/pfelements/pf-elements)
+### Go to [webcomponents.org](https://www.webcomponents.org/collection/pfelements/pf-elements)
 
 ---
 
@@ -136,10 +110,10 @@ Comments, questions, suggestions, issues, and pull requests are all welcome.
 
 Joing us at [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-- [Twitter](<a href="https://twitter.com/polymerio" class="twitter-follow-button" data-show-count="false">Follow @polymerio</a>)
-- [Facebook] (https://www.facebook.com/polymerjs)
-- [Google+] (https://plus.google.com/116168214823506639166) 
-- [YouTube] (https://www.youtube.com/channel/UCDKqvDyAn_QTBvCPvrZKTkw) 
+[Twitter](<a href="https://twitter.com/polymerio" class="twitter-follow-button" data-show-count="false">Follow @polymerio</a>)
+[Facebook](https://www.facebook.com/polymerjs)
+[Google+](https://plus.google.com/116168214823506639166) 
+[YouTube](https://www.youtube.com/channel/UCDKqvDyAn_QTBvCPvrZKTkw) 
 
 ### Some ways to help:
 
