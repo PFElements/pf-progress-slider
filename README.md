@@ -26,17 +26,11 @@ First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polyme
 
 This custom element can be customized in a number of ways
 
-## Customization of look and feel
-
-
-
  <pf-progress-bar>
 
 </pf-progress-bar>
-```
- 
 
-
+### Events
 Custom Event                     | Description                       
 ---------------------------------|----------------------------------------
 `event-add`                      | Add event retuns current selected date ('e.detail.date'), fired when user press add event button  
