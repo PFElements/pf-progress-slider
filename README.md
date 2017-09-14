@@ -33,8 +33,7 @@ This custom element can be customized in a number of ways
 ### Events
 Custom Event                     | Description                       
 ---------------------------------|----------------------------------------
-`event-add`                      | Add event retuns current selected date ('e.detail.date'), fired when user press add event button  
-`event-edit`                     | Edit event retuns event ('e.detail.event'),fired when user press edit event button
+`position-changed`               |  This event is Fired when position is changed
         
   
 
@@ -43,9 +42,9 @@ The following methods are available for crude events operation:
 
 Methods                                 | Description                           
 ----------------------------------------|--------------------------
-`addNewEvent(event)`                       |  Take event object and add as a into firebase 
-`updateEvent(key,event)`                |  Take firebase data ref key and updated event object , update the given ref key node                          
-`deleteEvent(key)`                      |  Take record ref key and delete that event                    
+`setCurrentPos(value)`                  |  Sets the current position of the slider to the given value
+`getCurrentPos()`                       |  Returns current value
+`setPosState(state, step)`              |  Sets the state of the given step e.g. set step 3 as pass                  
             
 
 ### Styling
@@ -53,8 +52,10 @@ The following custom properties and mixins are available for styling:
 
 Custom property                         | Description                             | Default
 ----------------------------------------|-----------------------------------------|-------------------------
-`--pf-calendar-bg-color`                |  Calendar background                    | #4A4A4A
-`--pf-calendar-width`                   |  Calendar Width                         | 420px
+`--pf-default-bar-color`                |  Default color of bar                   | silver
+`--pf-pass-bar-color`                   |  Passed color of bar                    | 27ae60
+`--pf-fail-bar-color`                   |  Failed color of bar                    | e74c3c
+`--pf-skip-bar-color`                   |  Skipped color of bar                   | 3498db
 
 
 
@@ -110,7 +111,7 @@ Comments, questions, suggestions, issues, and pull requests are all welcome.
 
 Joing us at [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-- [Twitter](<a href="https://twitter.com/polymerio" class="twitter-follow-button" data-show-count="false">Follow @polymerio</a>)
+- (<a href="https://twitter.com/polymerio" class="twitter-follow-button" data-show-count="false">Follow @polymerio</a>)
 - [Facebook](https://www.facebook.com/polymerjs)
 - [Google+](https://plus.google.com/116168214823506639166) 
 - [YouTube](https://www.youtube.com/channel/UCDKqvDyAn_QTBvCPvrZKTkw) 
