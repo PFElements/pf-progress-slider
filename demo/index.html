@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>pf-progress-bar demo</title>
+    <title>pf-progress-slider demo</title>
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../pf-progress-bar.html">
+    <link rel="import" href="../pf-progress-slider.html">
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -40,20 +40,24 @@
 
     <script>
       function pass(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('pass');
+        var progressBars = document.querySelectorAll('pf-progress-slider');
+        progressBars[bar].setPosState('pass');
       }
       function fail(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('fail');        
+        var progressBars = document.querySelectorAll('pf-progress-slider');
+        progressBars[bar].setPosState('fail');        
       }
       function skip(bar) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeState('skip');        
+        var progressBars = document.querySelectorAll('pf-progress-slider');
+        progressBars[bar].setPosState('skip');        
       }
       function jump(bar, element) {
-        var progressBars = document.querySelectorAll('pf-progress-bar');
-        progressBars[bar].changeCurrent(element.value);
+        var progressBars = document.querySelectorAll('pf-progress-slider');
+        progressBars[bar].setCurrentPos(element.value);
+      }      
+      function currPos() {
+        var progressBars = document.querySelectorAll('pf-progress-slider');
+        console.log("Current Position: "+ progressBars[bar].getCurrentPos());
       }
     </script>
   </head>
@@ -63,7 +67,7 @@
       <demo-snippet>
         <template>
           <!-- Default orientation is horizontal.  -->
-          <pf-progress-bar steps="55"></pf-progress-bar>
+          <pf-progress-slider steps="55"></pf-progress-slider>
         </template>
         <div style="width: 100%; text-align:center; padding: 10px 0px;">
           <button onclick="pass(0)">Pass</button>
@@ -80,9 +84,9 @@
         <!-- Make room for the testing buttons. -->
        <!--
        
-        <style>pf-progress-bar { height: calc(90% - 12px) }</style> 
+        <style>pf-progress-slider { height: calc(90% - 12px) }</style> 
         <template>
-          <pf-progress-bar vertical steps="10"></pf-progress-bar>
+          <pf-progress-slider vertical steps="10"></pf-progress-slider>
         </template>
         <div style="width: 100%; height: calc(10% + 12px); text-align:center;">
           <button onclick="pass(1)">Pass</button>

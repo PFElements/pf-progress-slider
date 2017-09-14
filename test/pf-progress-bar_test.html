@@ -4,36 +4,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>pf-progress-bar test</title>
+    <title>pf-progress-slider test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-
-    <link rel="import" href="../pf-progress-bar.html">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+   
+    <link rel="import" href="../pf-progress-slider.html">
   </head>
   <body>
 
     <test-fixture id="BasicTestFixture">
       <template>
-        <pf-progress-bar></pf-progress-bar>
+        <pf-progress-slider></pf-progress-slider>
       </template>
     </test-fixture>
 
     <test-fixture id="ChangedPropertyTestFixture">
       <template>
-        <pf-progress-bar prop1="new-prop1"></pf-progress-bar>
+        <pf-progress-slider prop1="new-prop1"></pf-progress-slider>
       </template>
     </test-fixture>
 
     <script>
-      suite('pf-progress-bar', function() {
+      suite('pf-progress-slider', function() {
 
         test('instantiating the element with default properties works', function() {
           var element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'pf-progress-bar');
+          assert.equal(element.prop1, 'pf-progress-slider');
           var elementShadowRoot = element.shadowRoot;
           var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello pf-progress-bar!');
+          assert.equal(elementHeader.innerHTML, 'Hello pf-progress-slider!');
         });
 
         test('setting a property on the element works', function() {

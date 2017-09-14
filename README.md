@@ -4,14 +4,14 @@ A Polymer 2.0 based collection of reusable web components
 [![Join the chat at https://gitter.im/pf-elements/Lobby](https://badges.gitter.im/pf-elements/Lobby.svg)](https://gitter.im/pf-elements/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/PFElements/pf-progress-bar)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/PFElements/pf-progress-slider)
 
 ## Demo
-[Click here for docs & demo](https://www.webcomponents.org/element/PFElements/pf-progress-bar/demo/demo/index.html)
+[Click here for docs & demo](https://www.webcomponents.org/element/PFElements/pf-progress-slider/demo/demo/index.html)
 
 | Element Name | Latest Version (Bower) | Npm version  | Build Status |
 |--------------|------------------------|--------------|--------------|
-| [pf-progress-bar](https://github.com/PFElements/pf-progress-bar) | [![GitHub version](https://badge.fury.io/gh/PFElements%2Fpf-progress-bar.svg)](https://badge.fury.io/gh/PFElements%2Fpf-progress-bar) | [![npm version](https://badge.fury.io/js/pf-progress-bar.svg)](https://www.npmjs.com/package/pf-progress-bar) |[![Build Status](https://travis-ci.org/PFElements/pf-progress-bar.svg?branch=master)](https://travis-ci.org/PFElements/pf-progress-bar) | | [pf-progress-bar]|
+| [pf-progress-slider](https://github.com/PFElements/pf-progress-slider) | [![GitHub version](https://badge.fury.io/gh/PFElements%2Fpf-progress-slider.svg)](https://badge.fury.io/gh/PFElements%2Fpf-progress-slider) | [![npm version](https://badge.fury.io/js/pf-progress-slider.svg)](https://www.npmjs.com/package/pf-progress-slider) |[![Build Status](https://travis-ci.org/PFElements/pf-progress-slider.svg?branch=master)](https://travis-ci.org/PFElements/pf-progress-slider) | | [pf-progress-slider]|
 
 ## Install the Polymer-CLI
 
@@ -19,16 +19,16 @@ First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polyme
 
 ---
 # A composite component
-`<pf-progress-bar></pf-progress-bar>` Use this element to track the progress of the user, this can be made interactive as well and user can go back to a certain step and submit the progress again, progress bar will update the progress status with the right indication(color). 
+`<pf-progress-slider></pf-progress-slider>` Use this element to track the progress of the user, this can be made interactive as well and user can go back to a certain step and submit the progress again, progress bar will update the progress status with the right indication(color). 
 
 
 # Customization and usage
 
 This custom element can be customized in a number of ways
 
- <pf-progress-bar>
+ <pf-progress-slider>
 
-</pf-progress-bar>
+</pf-progress-slider>
 
 ### Events
 Custom Event                     | Description                       

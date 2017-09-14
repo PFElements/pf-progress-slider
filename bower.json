@@ -1,5 +1,5 @@
 {
-  "name": "pf-progress-bar",
+  "name": "pf-progress-slider",
   "authors": [
     "The PolymerJS.io Authors"
   ],
@@ -23,7 +23,7 @@
     "url": "git://github.com/PFElements/pf-progress-slider.git"
   },
   "description": "Interval progress bar.",
-  "main": "pf-progress-bar.html",
+  "main": "pf-progress-slider.html",
   "homepage": "https://github.com/PFElements/pf-progress-slider",
   "dependencies": {
     "polymer": "Polymer/polymer",

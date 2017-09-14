@@ -1,9 +1,12 @@
 {
-    "name": "pf-progress-bar",
+    "name": "pf-progress-slider",
     "version": "0.1.0",
     "description": "Polymer 2.0 custom element for progress, multiple status indicators for pass/fail or skipped state, can be used to track progress of a user",
-    "main": "pf-progress-bar.html",
-    "repository": "PFElements/pf-progress-bar",
+    "main": "pf-progress-slider.html",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/PFElements/pf-progress-slider.git"
+      },
     "keywords": [
       "web-components",
       "web-component",
@@ -25,6 +28,6 @@
     "homepage": "https://polymerjs.io",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/PFElements/pf-progress-bar/issues"
+      "url": "https://github.com/PFElements/pf-progress-slider/issues"
     }
   }

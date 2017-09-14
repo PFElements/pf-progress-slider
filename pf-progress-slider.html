@@ -1,29 +1,56 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-slider/paper-slider.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-slider/paper-slider.html">
 
-<dom-module id="pf-progress-bar">
+<!--
+### Styling
+The following custom properties and mixins are available for styling:
+Custom property                         | Description                             | Default
+----------------------------------------|-----------------------------------------|-------------------------
+`--pf-default-bar-color`                |  Default color of bar                   | silver
+`--pf-pass-bar-color`                   |  Passed color of bar                    | 27ae60
+`--pf-fail-bar-color`                   |  Failed color of bar                    | e74c3c
+`--pf-skip-bar-color`                   |  Skipped color of bar                   | 3498db
+### Custom Events
+Custom Event                     | Description
+---------------------------------|----------------------------------------
+`position-changed`               |  This event is Fired when position is changed
+### Methods
+
+Methods                                 | Description
+----------------------------------------|--------------------------
+`setCurrentPos(value)`                  |  Sets the current position of the slider to the given value
+`getCurrentPos()`                |  Returns current value
+`setPosState(state, step)`                      |  Sets the state of the given step e.g. set step 3 as pass
+@demo demo/index.html
+-->
+
+<dom-module id="pf-progress-slider">
   <template>
     <style>
       * {
         transition: 0.3s;
       }
-      :host {
+
+       :host {
         display: block;
-        height: 100%; 
+        height: 100%;
         width: 100%;
       }
+
       #container {
         display: inline-block;
         margin: 0px;
         padding: 0px;
         transform-origin: 20px;
       }
+
       #progressbar {
         display: table;
         margin-left: 15px;
         height: 8px;
         width: calc(100% - 30px);
       }
+
       #slider {
         width: 100%;
         --paper-slider-height: 1px;
@@ -33,32 +60,39 @@
         --paper-slider-container-color: silver;
         --paper-slider-active-color: silver;
       }
+
       .pstep {
         display: table-cell;
         border-bottom: 4px solid transparent;
       }
+
       .default {
-        border-bottom-color: silver;
+        border-bottom-color: var(--pf-default-bar-color, silver);
       }
+
       .pass {
         border-bottom-width: 6px;
-        border-bottom-color: #27ae60;
+        border-bottom-color:var(--pf-pass-bar-color, #27ae60) ;
       }
+
       .fail {
         border-bottom-width: 6px;
-        border-bottom-color: #e74c3c;
+        border-bottom-color:var(--pf-fail-bar-color, #e74c3c) ;
+        
       }
+
       .skip {
         border-bottom-width: 6px;
-        border-bottom-color: #3498db;
+        border-bottom-color:var(--pf-skip-bar-color, #3498db) ;
       }
+
       .current {
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
         border-bottom-width: 8px !important;
       }
     </style>
-    
+
     <div id="container">
       <div id="progressbar"></div>
       <paper-slider id="slider" min="1" max="{{steps}}"></paper-slider>
@@ -68,7 +102,7 @@
 
   <script>
     /**
-     * `pf-progress-bar`
+     * `pf-progress-slider`
      * Interval progress bar.
      *
      * @customElement
@@ -80,7 +114,7 @@
        * Returns the name of the element.
        */
       static get is() {
-        return 'pf-progress-bar';
+        return 'pf-progress-slider';
       }
       /**
        * Returns the element properties.
@@ -108,7 +142,7 @@
        */
       connectedCallback() {
         super.connectedCallback();
-        for(var i = 0; i < this.steps; i++) {
+        for (var i = 0; i < this.steps; i++) {
           var cell = document.createElement('div');
           cell.classList.add('pstep', 'default');
           this.$.progressbar.appendChild(cell);
@@ -128,21 +162,21 @@
         //     this.translate3d(0, 0, 0, this.$.sliderKnob);
         //   }
         // }
-        this.$.slider._createRipple = function() {
+        this.$.slider._createRipple = function () {
           this._rippleContainer = this.$.sliderKnob;
           return Polymer.PaperInkyFocusBehaviorImpl._createRipple.call(this);
         }
-        if(this.vertical) {
+        if (this.vertical) {
           this.$.container.style.transform = 'rotate(90deg)';
           this.$.container.style.width = this.clientHeight + 'px';
           var self = this;
-          this.$.slider._trackX = function(event) {
+          this.$.slider._trackX = function (event) {
             if (!this.dragging) {
               this._trackStart(event);
             }
             var direction = this._isRTL ? -1 : 1;
             var dx = Math.min(this._maxx, Math.max(this._minx, event.detail.dx * direction));
-            if(self.vertical)
+            if (self.vertical)
               dx = Math.min(this._maxx, Math.max(this._minx, event.detail.dy * direction));
             this._x = this._startx + dx;
             var immediateValue = this._calcStep(this._calcKnobPosition(this._x / this._w * 100));
@@ -150,11 +184,11 @@
             var translateX = ((this._calcRatio(this.immediateValue) * this._w) - this._knobstartx);
             this.translate3d(translateX + 'px', 0, 0, this.$.sliderKnob);
           }
-          this.$.slider._bardown = function(event) {
+          this.$.slider._bardown = function (event) {
             this._w = this.$.sliderBar.offsetWidth;
             var rect = this.$.sliderBar.getBoundingClientRect();
             var ratio = (event.detail.x - rect.left) / this._w * 100;
-            if(self.vertical)
+            if (self.vertical)
               ratio = (event.detail.y - rect.top) / this._w * 100;
             if (this._isRTL) {
               ratio = 100 - ratio;
@@ -166,8 +200,8 @@
             if (prevRatio === this.ratio) {
               this._setTransiting(false);
             }
-            this.async(function() {
-              this.fire('change', {composed: true});
+            this.async(function () {
+              this.fire('change', { composed: true });
             });
             event.preventDefault();
             this.focus();
@@ -182,34 +216,42 @@
       ready() {
         super.ready();
         var self = this;
-        this.$.slider.addEventListener('immediate-value-changed', function() {self._setCurrent(this.immediateValue)});
-        this.$.slider.addEventListener('value-changed', function() {self._setCurrent(this.value)});
+        this.$.slider.addEventListener('immediate-value-changed', function () { self._setCurrent(this.immediateValue) });
+        this.$.slider.addEventListener('value-changed', function () { self._setCurrent(this.value) });
       }
-      changeCurrent(value) {
-        if(value < 1 || value > this.steps || isNaN(value) || value == this.current)
+      setCurrentPos(value) {
+        if (value < 1 || value > this.steps || isNaN(value) || value == this.current)
           return;
         var diff = this.current - value;
-        for(var i = 0; i < Math.abs(diff); i++)
+        for (var i = 0; i < Math.abs(diff); i++)
           (diff < 0) ? this.$.slider.increment() : this.$.slider.decrement();
+
+        this.dispatchEvent(new CustomEvent('position-changed', { detail: { pos: this.current } }));
       }
-      changeState(state, step) {
+      setPosState(state, step) {
         step = step || this.current;
-        if(step < 1 || step > this.steps)
+        if (step < 1 || step > this.steps)
           return;
         var steps = this.shadowRoot.querySelectorAll('.pstep');
-        steps[step-1].classList.remove('default', 'pass', 'fail','skip');
-        steps[step-1].classList.add(state);
-        if(step == this.current)
+        steps[step - 1].classList.remove('default', 'pass', 'fail', 'skip');
+        steps[step - 1].classList.add(state);
+        if (step == this.current)
           this.$.slider.increment();
+        this.dispatchEvent(new CustomEvent('position-changed', { detail: { pos: this.current } }));
       }
       _setCurrent(value) {
-        if(value < 1 || value > this.steps || isNaN(value))
+        if (value < 1 || value > this.steps || isNaN(value))
           return;
         var steps = this.shadowRoot.querySelectorAll('.pstep');
-        steps[this.current-1].classList.remove('current');
-        steps[value-1].classList.add('current');
+        steps[this.current - 1].classList.remove('current');
+        steps[value - 1].classList.add('current');
         this.current = value;
+        this.dispatchEvent(new CustomEvent('position-changed', { detail: { pos: this.current } }));
       }
+      getCurrentPos() {
+        return current;
+      }
+
     }
     window.customElements.define(PfProgressBar.is, PfProgressBar);
   </script>
