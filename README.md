@@ -21,14 +21,45 @@ First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polyme
 # A composite component
 `<pf-progress-slider></pf-progress-slider>` Use this element to track the progress of the user, this can be made interactive as well and user can go back to a certain step and submit the progress again, progress bar will update the progress status with the right indication(color). 
 
-
-# Customization and usage
-
-This custom element can be customized in a number of ways
-
- <pf-progress-slider>
+#### Horizontal Example
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="pf-progress-slider.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+ <pf-progress-slider steps="55">
 
 </pf-progress-slider>
+```
+
+#### Vertical Example
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="pf-progress-slider.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+ <pf-progress-slider vertical steps="70>
+
+</pf-progress-slider>
+```
+# Customization and usage
+
+This element can be customized in a number of ways
+
+
+
 
 ### Events
 Custom Event                     | Description                       
